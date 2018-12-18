@@ -1,6 +1,9 @@
 # 『밑바닥부터 시작하는 딥러닝』 (원서 : ゼロから作る Deep Learning)
 
 ---
+## 책 내용을 학습하면서 정리한 코드는 "_mystudy" 폴더에 있음 (소스코드에 대한 해설도 일부 포함)
+
+---
 
 <img src="https://github.com/WegraLee/deep-learning-from-scratch/blob/master/cover_image.jpg" width="480">
 
