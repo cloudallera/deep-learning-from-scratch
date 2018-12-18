@@ -4,3 +4,4 @@
 *.pyc
 __pycache__/
 dl_scratch_old/
+.ipynb_checkpoints/
