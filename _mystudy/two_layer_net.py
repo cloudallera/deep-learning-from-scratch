@@ -37,8 +37,8 @@ class TwoLayerNet:
         return x
 
     def loss(self, x, t):    # x는 입력 데이터, t는 정답 레이블
-        y = self.predict()
-        return self.lastLayer.forward(x, t)
+        y = self.predict(x)
+        return self.lastLayer.forward(y, t)
 
     def accuracy(self, x, t):
         y = self.predict(x)
