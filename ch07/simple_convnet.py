@@ -32,7 +32,18 @@ class SimpleConvNet:
         filter_stride = conv_param['stride']
         input_size = input_dim[1]
         conv_output_size = (input_size - filter_size + 2*filter_pad) / filter_stride + 1
-        pool_output_size = int(filter_num * (conv_output_size/2) * (conv_output_size/2))
+
+        pool_size = 2
+        pool_stride = 2     # 일반적으로 pool_size와 같게 설정함
+        pool_h_size = pool_w_size = int(((conv_output_size - pool_size) / pool_stride) + 1)
+        # 입력 데이터 1개에 대한 Pooling 계층의 출력 크기
+        pool_output_size = filter_num * pool_h_size * pool_w_size
+        
+        # pool_output_size 도출 관련 교재 내용 
+        # (pool_size와 pool_stride가 같기 때문에 위의 수식을 간략화 하면 아래와 같음)
+        # pool_output_size = int(filter_num * (conv_output_size/pool_size) * (conv_output_size/pool_size))
+        # 교재에서는 pool_size와  pool_stride가 2이기 때문에 아래와 같이 작성되어 있음
+        # pool_output_size = int(filter_num * (conv_output_size/2) * (conv_output_size/2))
 
         # 가중치 초기화
         self.params = {}
@@ -51,7 +62,7 @@ class SimpleConvNet:
         self.layers['Conv1'] = Convolution(self.params['W1'], self.params['b1'],
                                            conv_param['stride'], conv_param['pad'])
         self.layers['Relu1'] = Relu()
-        self.layers['Pool1'] = Pooling(pool_h=2, pool_w=2, stride=2)
+        self.layers['Pool1'] = Pooling(pool_h=pool_size, pool_w=pool_size, stride=pool_stride)
         self.layers['Affine1'] = Affine(self.params['W2'], self.params['b2'])
         self.layers['Relu2'] = Relu()
         self.layers['Affine2'] = Affine(self.params['W3'], self.params['b3'])
